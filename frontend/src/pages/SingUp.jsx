@@ -7,14 +7,17 @@ import { PiPasswordFill } from "react-icons/pi";
 import { MdAlternateEmail } from "react-icons/md";
 import { SiNamecheap } from "react-icons/si";
 import { useNavigate } from 'react-router-dom';
+import useSingupUser from '../features/auth/useSingupUser';
+import { useMutation } from '@tanstack/react-query';
 
 function SingUp() {
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
     const navigate = useNavigate()
+    const {singupUser, isLoading} = useSingupUser()
+    
 
     const onSubmit = (data) => {
-        console.log(data);
-        
+        singupUser(data)
     }
 
     return (
@@ -68,7 +71,7 @@ function SingUp() {
                     validationSchema={{
                         required: 'this is required',
                         minLength:{
-                            value: 8,
+                            value: 6,
                             message: 'this field most be higher than 8'
                         },
                         maxLength:{
@@ -77,7 +80,11 @@ function SingUp() {
                         }
                     }}
                 />
-                <button type='submit' className='btn btn--primary_fill w-full'>Singup</button>
+                <button type='submit' className='btn btn--primary_fill w-full'>
+                    {
+                        isLoading ? 'Loading ...' : 'Singup'
+                    }
+                </button>
                 <h2 className='text-lg'>Don't have an account?</h2>
                 <button onClick={() => navigate('/login')} className='btn btn--primary_outline w-5/6 mx-4'>Login</button>
             </form>

@@ -5,11 +5,13 @@ import SingUp from "./pages/SingUp"
 import AppLayout from "./ui/AppLayout"
 import Profile from "./pages/Profile"
 import Notification from "./pages/Notification"
+import { Toaster } from "react-hot-toast"
 
 function App() {
 
   return (
     <>
+      <Toaster />
       <Routes>
         <Route path="/singup" element={<SingUp />} />
         <Route path="/login" element={<Login />} />

@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --color-primary-900: 74, 109, 255;
+        --color-primary-800: 92, 124, 255;
+        --color-primary-700: 110, 138, 255;
+        --color-primary-600: 128, 153, 255;
+        --color-primary-500: 146, 167, 255;
+        --color-primary-400: 164, 182, 255;
+        --color-primary-300: 183, 197, 255;
+        --color-primary-200: 201, 211, 255;
+        --color-primary-100: 219, 226, 255;
+        --color-primary-50: 228, 233, 255;
+        --color-secondary-900: 249, 250, 251;
+        --color-secondary-800: 243, 244, 246;
+        --color-secondary-700: 229, 231, 235;
+        --color-secondary-600: 209, 213, 219;
+        --color-secondary-500: 156, 163, 175;
+        --color-secondary-400: 107, 114, 128;
+        --color-secondary-300: 75, 85, 99;
+        --color-secondary-200: 55, 65, 81;
+        --color-secondary-100: 31, 41, 55;
+        --color-secondary-50: 17, 24, 39;
+        --color-secondary-0: 24, 33, 47;
+        --color-success: 0, 192, 115;
+        --color-warning: 255, 153, 0;
+        --color-error: 255, 71, 87;
+        --color-red-500: 239, 68, 68;
+        --color-red-300: 252, 165, 165;
+    }
+}
+
+@layer components {
+    .textFieldContainer {
+        @apply w-full py-2 px-3 text-white border items-center border-secondary-200 flex gap-x-2 rounded-md
+    }
+
+    .btn {
+        @apply p-4 rounded-full
+    }
+
+    .btn--primary_fill {
+        @apply bg-primary-900 text-secondary-900 text-lg font-medium shadow-lg shadow-primary-800/80 border-none hover:bg-primary-800
+    }
+
+    .btn--primary_outline {
+        @apply bg-transparent border-primary-900 text-primary-900 hover:bg-primary-900 hover:text-secondary-900
+    }
+
+    .btn--secondary_outline {
+        @apply bg-transparent border-secondary-900 text-secondary-900 hover:bg-secondary-900 hover:text-secondary-0
+    }
+
+    .btn--secondary_fill {
+        @apply bg-secondary-900 text-secondary-0 hover:bg-secondary-800
+    }
+
+    .SidbarNav {
+        @apply relative w-full h-[4rem] md:h-[3.5rem] md:px-3 rounded-full flex items-center justify-center md:justify-start text-2xl my-1 hover:bg-secondary-100 duration-100
+    }
+}
+
+body {
+    background-color: rgb(var(--color-secondary-50));
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+}

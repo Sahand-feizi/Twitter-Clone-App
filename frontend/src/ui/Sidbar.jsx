@@ -1,15 +1,17 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { TiHome } from "react-icons/ti";
 import { IoIosNotifications } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
 import XSvg from '../features/svg/X';
 import { TbLogout2 } from "react-icons/tb";
-import { User } from '../db/dummyData';
 import ProfileBtnSkeleton from '../features/profile/skeleton/ProfileBtnSkeleton'
+import useGetAuthUser from '../features/auth/useGetAuthUser';
 
 function Sidbar() {
-    const isLoading = false;
+    const {authUser, isLoading} = useGetAuthUser()
+    const navigate = useNavigate()
+    
 
     return (
         <nav className='pr-4 border-r border-r-secondary-400 h-screen flex flex-col list-none pb-10 justify-between sticky top-5'>
@@ -31,7 +33,7 @@ function Sidbar() {
                         <p className='text-lg text-secondary-900 hidden md:flex'>Notifications</p>
                     </li>
                 </NavLink>
-                <NavLink className='SidbarNav' to={`/profile/${User.username}`}>
+                <NavLink className='SidbarNav' to={`/profile/${authUser?.username}`}>
                     <li className='md:flex md:items-center md:gap-x-3 md:justify-start'>
                         <FaUser />
                         <p className='text-lg text-secondary-900 hidden md:flex'>Profile</p>
@@ -42,15 +44,15 @@ function Sidbar() {
                 isLoading ? (
                     <ProfileBtnSkeleton />
                 ) : (
-                    <button className='text-secondary-900 hover:text-error w-full flex items-center justify-center text-xl duration-100 transition-all md:justify-between md:px-3'>
+                    <button onClick={() => navigate(`/profile/${authUser?.username}`)} className='text-secondary-900 hover:text-error w-full flex items-center justify-center text-xl duration-100 transition-all md:justify-between md:px-3'>
                         <img
                             className='h-8 w-8 rounded-full object-cover hidden md:flex'
-                            src={User.profileImg}
+                            src={authUser?.profileImg || '/avatar-placeholder.png'}
                             alt="profileImage"
                         />
                         <div className='hidden md:block text-left '>
-                            <h2 className='text-lg text-secondary-900 font-bold'>{User.fullName}</h2>
-                            <p className='text-sm text-secondary-400'>@{User.username}</p>
+                            <h2 className='text-lg text-secondary-900 font-bold'>{authUser?.fullName}</h2>
+                            <p className='text-sm text-secondary-400'>@{authUser?.username}</p>
                         </div>
                         <TbLogout2 />
                     </button>

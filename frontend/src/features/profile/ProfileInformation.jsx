@@ -9,10 +9,14 @@ function ProfileInformation({ user }) {
             <p className='text-sm text-secondary-400 text-center'>{user.length}@{user?.username}</p>
             <p className='text-sm text-secondary-900 text-center'>{user.bio}</p>
             <div className='flex items-center gap-x-4 flex-wrap gap-y-2'>
-                <div className='flex items-center gap-x-2 text-sm text-secondary-400'>
-                    <FaLink />
-                    <a target='blank' className='text-primary-700' href={user.link}>{user.link}</a>
-                </div>
+                {
+                    user.link && (
+                        <div className='flex items-center gap-x-2 text-sm text-secondary-400'>
+                            <FaLink />
+                            <a target='blank' className='text-primary-700' href={user.link}>{user.link}</a>
+                        </div>
+                    )
+                }
                 <div className='flex items-center gap-x-2 text-sm text-secondary-400'>
                     <BsFillCalendar2DateFill />
                     <p>joined April 2025</p>

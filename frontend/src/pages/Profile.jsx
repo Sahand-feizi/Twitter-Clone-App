@@ -8,11 +8,12 @@ import PostSkeleton from '../features/post/skeleton/PostSkeleton'
 import ProfileAvatarSkeleton from '../features/profile/skeleton/ProfileAvatarSkeleton'
 import ProfileInformationSkeleton from '../features/profile/skeleton/ProfileInformationSkeleton'
 import HeaderProfileSkeleton from '../features/profile/skeleton/HeaderProfileSkeleton'
+import useGetAuthUser from '../features/auth/useGetAuthUser'
 
 function Profile() {
     const [feedType, setFeedType] = useState('posts')
     const hoverFeedTypeStyle = 'after:content-[""] after:bottom-0 after:w-1/2 after:h-1.5 after:rounded-full after:bg-primary-900 after:absolute'
-    const isLoading = false;
+    const { authUser, isLoading } = useGetAuthUser()
 
     return (
         <div className='border-r border-r-secondary-400'>
@@ -20,21 +21,21 @@ function Profile() {
                 isLoading ? (
                     <HeaderProfileSkeleton />
                 ) : (
-                    <HeaderProfile fullName={User.fullName} posts={POSTS} />
+                    <HeaderProfile fullName={authUser?.fullName} posts={POSTS} />
                 )
             }
             {
                 isLoading ? (
                     <ProfileAvatarSkeleton />
                 ) : (
-                    <ProfileAvatar user={User} />
+                    <ProfileAvatar user={authUser} />
                 )
             }
             {
                 isLoading ? (
                     <ProfileInformationSkeleton />
                 ) : (
-                    <ProfileInformation user={User}/>
+                    <ProfileInformation user={authUser} />
                 )
             }
             <div className='flex items-center border-b border-b-secondary-400 mt-5'>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaLink } from "react-icons/fa6";
 import { BsFillCalendar2DateFill } from "react-icons/bs";
+import { formatMemberSinceDate } from '../../utils/date';
 
 function ProfileInformation({ user }) {
     return (
@@ -19,7 +20,7 @@ function ProfileInformation({ user }) {
                 }
                 <div className='flex items-center gap-x-2 text-sm text-secondary-400'>
                     <BsFillCalendar2DateFill />
-                    <p>joined April 2025</p>
+                    <p>{formatMemberSinceDate(user.updatedAt)}</p>
                 </div>
             </div>
             <div className='flex items-center gap-x-4 flex-wrap'>

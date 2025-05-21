@@ -14,7 +14,7 @@ function Profile() {
     const [feedType, setFeedType] = useState('posts')
     const hoverFeedTypeStyle = 'after:content-[""] after:bottom-0 after:w-1/2 after:h-1.5 after:rounded-full after:bg-primary-900 after:absolute'
     const { authUser, isLoading } = useGetAuthUser()
-
+    
     return (
         <div className='border-r border-r-secondary-400'>
             {

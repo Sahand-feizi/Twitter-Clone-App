@@ -7,14 +7,16 @@ import { PiPasswordFill } from "react-icons/pi";
 import { MdAlternateEmail } from "react-icons/md";
 import { SiNamecheap } from "react-icons/si";
 import { useNavigate } from 'react-router-dom';
+import useLoginUser from '../features/auth/useLoginUser'
+import Loading from '../ui/Loading';
 
 function Login() {
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
     const navigate = useNavigate()
+    const { loginUser, isLoading } = useLoginUser()
 
     const onSubmit = (data) => {
-        console.log(data);
-
+        loginUser(data)
     }
 
     return (
@@ -44,8 +46,8 @@ function Login() {
                     validationSchema={{
                         required: 'this is required',
                         minLength: {
-                            value: 8,
-                            message: 'this field most be higher than 8'
+                            value: 6,
+                            message: 'this field most be higher than 6'
                         },
                         maxLength: {
                             value: 15,
@@ -53,7 +55,13 @@ function Login() {
                         }
                     }}
                 />
-                <button type='submit' className='btn btn--primary_fill w-full'>Login</button>
+                <button type='submit' className='btn btn--primary_fill w-full'>
+                    {
+                        isLoading ? (
+                            <Loading size='sm'/>
+                        ) : 'Login'
+                    }
+                </button>
                 <h2 className='text-lg'>Don't have an account?</h2>
                 <button onClick={() => navigate('/singup')} className='btn btn--primary_outline w-5/6 mx-4'>Singup</button>
             </form>

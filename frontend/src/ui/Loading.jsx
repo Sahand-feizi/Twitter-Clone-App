@@ -8,10 +8,10 @@ const loadingSize = {
     xl: 'loading-xl'
 }
 
-function Loding({ size }) {
+function Loading({ size }) {
     return (
         <span className={`loading loading-spinner ${loadingSize[size]}`}></span>
     )
 }
 
-export default Loding
+export default Loading

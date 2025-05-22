@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import useAuthorize from '../features/auth/useAuthorize'
-import Loding from './Loding'
+import Loading from './Loading'
 import { useNavigate } from 'react-router-dom'
 
 function ProtectRoute({children}) {
@@ -15,7 +15,7 @@ function ProtectRoute({children}) {
     if(isLoading)
         return (
             <div className='w-full h-screen flex items-center justify-center'>
-                <Loding size='xl'/>
+                <Loading size='xl'/>
             </div>
         )
      

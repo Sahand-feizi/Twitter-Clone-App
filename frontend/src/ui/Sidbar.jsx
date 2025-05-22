@@ -7,11 +7,13 @@ import XSvg from '../features/svg/X';
 import { TbLogout2 } from "react-icons/tb";
 import ProfileBtnSkeleton from '../features/profile/skeleton/ProfileBtnSkeleton'
 import useGetAuthUser from '../features/auth/useGetAuthUser';
+import useLogoutUser from '../features/auth/useLogoutUser'
+import Loading from '../ui/Loading'
 
 function Sidbar() {
-    const {authUser, isLoading} = useGetAuthUser()
+    const { authUser, isLoading } = useGetAuthUser()
     const navigate = useNavigate()
-    
+    const { logoutUser, isLoading: isPending } = useLogoutUser()
 
     return (
         <nav className='pr-4 border-r border-r-secondary-400 h-screen flex flex-col list-none pb-10 justify-between sticky top-5'>
@@ -44,17 +46,27 @@ function Sidbar() {
                 isLoading ? (
                     <ProfileBtnSkeleton />
                 ) : (
-                    <button onClick={() => navigate(`/profile/${authUser?.username}`)} className='text-secondary-900 hover:text-error w-full flex items-center justify-center text-xl duration-100 transition-all md:justify-between md:px-3'>
+                    <button className='text-secondary-900 hover:text-error w-full flex items-center justify-center text-xl duration-100 transition-all md:justify-between md:px-3'>
                         <img
+                            onClick={() => navigate(`/profile/${authUser?.username}`)}
                             className='h-8 w-8 rounded-full object-cover hidden md:flex'
                             src={authUser?.profileImg || '/avatar-placeholder.png'}
                             alt="profileImage"
                         />
-                        <div className='hidden md:block text-left '>
+                        <div
+                            className='hidden md:block text-left'
+                            onClick={() => navigate(`/profile/${authUser?.username}`)}
+                        >
                             <h2 className='text-lg text-secondary-900 font-bold'>{authUser?.fullName}</h2>
                             <p className='text-sm text-secondary-400'>@{authUser?.username}</p>
                         </div>
-                        <TbLogout2 />
+                        {
+                            isPending ? (
+                                <Loading size='xs' />
+                            ) : (
+                                <TbLogout2 onClick={() => logoutUser()} />
+                            )
+                        }
                     </button>
                 )
             }

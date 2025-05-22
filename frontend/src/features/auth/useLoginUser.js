@@ -16,8 +16,8 @@ export default function useLoginUser() {
             })
             toast.success('Wellcome to Frelancer App')
         },
-        onError: ({ message }) => {
-            toast.error(message)
+        onError: (err) => {
+            toast.error(err?.response?.data?.error)
         }
     })
 

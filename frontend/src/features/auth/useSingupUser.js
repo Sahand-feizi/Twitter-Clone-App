@@ -17,8 +17,8 @@ export default function useSingupUser() {
 
             toast.success('Wellcome to the twitter!')
         },
-        onError: ({ message }) => {
-            toast.error(message)
+        onError: (err) => {
+            toast.error(err?.response?.data?.error)
         }
     })
 

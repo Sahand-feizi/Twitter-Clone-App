@@ -11,3 +11,7 @@ export const loginUserApi = (data) => {
 export const getAuthUser = () => {
     return http.get('/auth/me').then(({ data }) => data)
 }
+
+export const logoutUserApi = () => {
+    return http.post('/auth/logout').then(({ data }) => data)
+}

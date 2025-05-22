@@ -6,6 +6,7 @@ import AppLayout from "./ui/AppLayout"
 import Profile from "./pages/Profile"
 import Notification from "./pages/Notification"
 import { Toaster } from "react-hot-toast"
+import ProtectRoute from "./ui/ProtectRoute"
 
 function App() {
 
@@ -15,7 +16,11 @@ function App() {
       <Routes>
         <Route path="/singup" element={<SingUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<AppLayout />}>
+        <Route path="/" element={
+          <ProtectRoute>
+            <AppLayout />
+          </ProtectRoute>
+        }>
           <Route index element={<Home />} />
           <Route path="profile/:username" element={<Profile />} />
           <Route path="notification" element={<Notification />} />

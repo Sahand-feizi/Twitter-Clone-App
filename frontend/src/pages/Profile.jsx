@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import HeaderProfile from '../features/profile/headerProfile'
-import { POSTS, User } from '../db/dummyData'
+import { POSTS } from '../db/dummyData'
 import ProfileAvatar from '../features/profile/ProfileAvatar'
 import ProfileInformation from '../features/profile/ProfileInformation'
 import Posts from '../features/post/Posts'
@@ -9,19 +9,25 @@ import ProfileAvatarSkeleton from '../features/profile/skeleton/ProfileAvatarSke
 import ProfileInformationSkeleton from '../features/profile/skeleton/ProfileInformationSkeleton'
 import HeaderProfileSkeleton from '../features/profile/skeleton/HeaderProfileSkeleton'
 import useGetAuthUser from '../features/auth/useGetAuthUser'
+import useGetPosts from '../features/post/useGetPosts'
 
 function Profile() {
     const [feedType, setFeedType] = useState('posts')
     const hoverFeedTypeStyle = 'after:content-[""] after:bottom-0 after:w-1/2 after:h-1.5 after:rounded-full after:bg-primary-900 after:absolute'
     const { authUser, isLoading } = useGetAuthUser()
-    
+    const { posts, isLoading: isLoadingPost, postsRefetch, isRefetching } = useGetPosts(feedType, authUser?.username, authUser?._id)
+
+    useEffect(() => {
+        postsRefetch()
+    }, [feedType])
+
     return (
         <div className='border-r border-r-secondary-400'>
             {
-                isLoading ? (
+                isLoading || isLoadingPost || isRefetching ? (
                     <HeaderProfileSkeleton />
                 ) : (
-                    <HeaderProfile fullName={authUser?.fullName} posts={POSTS} />
+                    <HeaderProfile fullName={authUser?.fullName} posts={posts} />
                 )
             }
             {
@@ -43,13 +49,13 @@ function Profile() {
                 <button onClick={() => setFeedType('likes')} className={`flex-1 flex justify-center relative items-center text-center bg-transparent py-2 hover:bg-secondary-100 ${feedType == "likes" && hoverFeedTypeStyle}`}>Likes</button>
             </div>
             {
-                isLoading ? (
+                isLoading || isLoadingPost || isRefetching ? (
                     <div className='w-full'>
                         <PostSkeleton />
                         <PostSkeleton />
                     </div>
                 ) : (
-                    <Posts posts={POSTS} />
+                    <Posts posts={posts} />
                 )
             }
         </div>

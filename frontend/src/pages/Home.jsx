@@ -1,14 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidbar from '../ui/Sidbar'
 import CreatePost from '../features/post/CreatePost'
 import Posts from '../features/post/Posts'
-import { POSTS } from '../db/dummyData'
 import PostSkeleton from '../features/post/skeleton/PostSkeleton'
+import useGetPosts from '../features/post/useGetPosts'
+import useGetAuthUser from '../features/auth/useGetAuthUser'
 
 function Home() {
     const [feedType, setFeedType] = useState('forYou')
     const hoverFeedTypeStyle = 'after:content-[""] after:bottom-0 after:w-1/2 after:h-1.5 after:rounded-full after:bg-primary-900 after:absolute'
-    const isLoading = false;
+    const { authUser } = useGetAuthUser()
+    const { posts, isLoading, postsRefetch, isRefetching } = useGetPosts(feedType, authUser?.username, authUser?._id)
+
+    useEffect(() => {
+        postsRefetch()
+    }, [feedType])
 
     return (
         <div className='border-r border-r-secondary-400 w-full'>
@@ -18,13 +24,13 @@ function Home() {
             </div>
             <CreatePost />
             {
-                isLoading ? (
+                isLoading || isRefetching ? (
                     <div className='w-full'>
                         <PostSkeleton />
                         <PostSkeleton />
                     </div>
                 ) : (
-                    <Posts posts={POSTS} />
+                    <Posts posts={posts} />
                 )
             }
         </div>

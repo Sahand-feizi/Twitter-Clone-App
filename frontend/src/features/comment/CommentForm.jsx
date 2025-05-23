@@ -1,8 +1,15 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import useCreateComment from './useCreateComment'
+import Loading from '../../ui/Loading'
 
-function CommentForm() {
+function CommentForm({ postId }) {
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
+    const { createComment, isCreating } = useCreateComment()
+
+    const createCommentHandler = (data) => {
+        createComment({ postId, data })
+    }
 
     return (
         <form className='flex items-center gap-x-2 py-2'>
@@ -16,7 +23,13 @@ function CommentForm() {
                 />
                 {errors && errors['text'] && <p className='text-sm font-thin text-erorr'>{errors['text'].message}</p>}
             </div>
-            <button className='btn btn--primary_fill'>Send</button>
+            <button onClick={handleSubmit(createCommentHandler)} className='btn btn--primary_fill'>
+                {
+                    isCreating ? (
+                        <Loading size='xs' />
+                    ) : 'Send'
+                }
+            </button>
         </form>
     )
 }

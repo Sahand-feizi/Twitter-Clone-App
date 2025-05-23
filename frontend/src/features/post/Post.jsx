@@ -68,7 +68,7 @@ function Post({ post }) {
                         >
                             <p className="text-xl text-white font-bold text-center">Comments</p>
                             {comments.length > 0 && <Comments comments={comments} />}
-                            <CommentForm />
+                            <CommentForm postId={post._id}/>
                         </Modal>
                     </>
                     <button className='text-secondary-500 text-2xl hover:text-secondary-600 flex gap-x-2 items-center'>

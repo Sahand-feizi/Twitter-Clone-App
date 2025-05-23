@@ -8,12 +8,18 @@ import Modal from '../../ui/Modal';
 import Comments from '../comment/Comments';
 import CommentForm from '../comment/CommentForm';
 import useGetAuthUser from '../auth/useGetAuthUser'
+import useRemovePost from './useRemovePost';
 
 function Post({ post }) {
     const [isOpen, setIsOpen] = useState(false)
     const { text, img, user, comments, likes } = post;
     const { authUser } = useGetAuthUser()
     const isMyPost = authUser?._id === user?._id;
+    const { removePost, isDeleting } = useRemovePost()
+
+    const removePostHandler = () => {
+        removePost(post?._id)
+    }
 
     return (
         <div className='w-full flex gap-x-2 p-4 border-b border-b-secondary-400'>
@@ -30,7 +36,7 @@ function Post({ post }) {
                     </div>
                     {
                         isMyPost ? (
-                            <button className='text-error text-lg'>
+                            <button onClick={removePostHandler} className='text-error text-lg'>
                                 <FaTrash />
                             </button>
                         ) : null

@@ -7,3 +7,7 @@ export const getPostsApi = (url) => {
 export const createPostApi = (data) => {
     return http.post('/posts/create', data).then(({ data }) => data)
 }
+
+export const removePostApi = (postId) => {
+    return http.delete(`posts/${postId}`).then(({ data }) => data)
+}

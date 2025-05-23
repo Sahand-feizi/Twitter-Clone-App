@@ -8,14 +8,14 @@ import PostSkeleton from '../features/post/skeleton/PostSkeleton'
 import ProfileAvatarSkeleton from '../features/profile/skeleton/ProfileAvatarSkeleton'
 import ProfileInformationSkeleton from '../features/profile/skeleton/ProfileInformationSkeleton'
 import HeaderProfileSkeleton from '../features/profile/skeleton/HeaderProfileSkeleton'
-import useGetAuthUser from '../features/auth/useGetAuthUser'
 import useGetPosts from '../features/post/useGetPosts'
+import useGetUserProfile from '../features/profile/useGetUserProfile'
 
 function Profile() {
     const [feedType, setFeedType] = useState('posts')
     const hoverFeedTypeStyle = 'after:content-[""] after:bottom-0 after:w-1/2 after:h-1.5 after:rounded-full after:bg-primary-900 after:absolute'
-    const { authUser, isLoading } = useGetAuthUser()
-    const { posts, isLoading: isLoadingPost, postsRefetch, isRefetching } = useGetPosts(feedType, authUser?.username, authUser?._id)
+    const { user, isLoading } = useGetUserProfile()
+    const { posts, isLoading: isLoadingPost, postsRefetch, isRefetching } = useGetPosts(feedType, user?.username, user?._id)
 
     useEffect(() => {
         postsRefetch()
@@ -27,21 +27,21 @@ function Profile() {
                 isLoading || isLoadingPost || isRefetching ? (
                     <HeaderProfileSkeleton />
                 ) : (
-                    <HeaderProfile fullName={authUser?.fullName} posts={posts} />
+                    <HeaderProfile fullName={user?.fullName} posts={posts} />
                 )
             }
             {
                 isLoading ? (
                     <ProfileAvatarSkeleton />
                 ) : (
-                    <ProfileAvatar user={authUser} />
+                    <ProfileAvatar user={user} />
                 )
             }
             {
                 isLoading ? (
                     <ProfileInformationSkeleton />
                 ) : (
-                    <ProfileInformation user={authUser} />
+                    <ProfileInformation user={user} />
                 )
             }
             <div className='flex items-center border-b border-b-secondary-400 mt-5'>

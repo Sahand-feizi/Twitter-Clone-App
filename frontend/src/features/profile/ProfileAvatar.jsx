@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import useReadFileInput from '../../hooks/useReadFileInput'
 import { MdEdit } from "react-icons/md";
+import useGetAuthUser from '../auth/useGetAuthUser';
 
 function ProfileAvatar({ user }) {
     const [coverImg, setCoverImg] = useState(null)
     const [profileImg, setProfileImg] = useState(null)
     const { inputRef: coverImgRef, onImageChange: changeCoverImg } = useReadFileInput(setCoverImg)
     const { inputRef: profileImgRef, onImageChange: changeProfileImg } = useReadFileInput(setProfileImg)
+    const { authUser } = useGetAuthUser()
 
-    const isMyProfile = true;
+    const isMyProfile = authUser._id == user._id;
     const isFollow = true;
 
     return (
@@ -54,7 +56,7 @@ function ProfileAvatar({ user }) {
                     )
                 }
                 {
-                    (coverImg || profileImg) && 
+                    (coverImg || profileImg) &&
                     <button className='btn btn--primary_fill py-2'>Update</button>
                 }
             </div>

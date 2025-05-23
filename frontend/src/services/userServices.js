@@ -7,3 +7,7 @@ export const getSuggestedUsersApi = () => {
 export const getUserProfileApi = (username) => {
     return http.get(`/users/profile/${username}`).then(({ data }) => data)
 }
+
+export const followUserApi = (id) => {
+    return http.post(`/users/follow/${id}`).then(({ data }) => data)
+}

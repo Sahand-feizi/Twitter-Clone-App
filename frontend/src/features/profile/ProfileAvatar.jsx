@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import useReadFileInput from '../../hooks/useReadFileInput'
 import { MdEdit } from "react-icons/md";
 import useGetAuthUser from '../auth/useGetAuthUser';
+import useFollowUser from '../../hooks/useFollowUser';
 
 function ProfileAvatar({ user }) {
     const [coverImg, setCoverImg] = useState(null)
@@ -9,9 +10,10 @@ function ProfileAvatar({ user }) {
     const { inputRef: coverImgRef, onImageChange: changeCoverImg } = useReadFileInput(setCoverImg)
     const { inputRef: profileImgRef, onImageChange: changeProfileImg } = useReadFileInput(setProfileImg)
     const { authUser } = useGetAuthUser()
+    const { followUser, isFollowing } = useFollowUser()
 
     const isMyProfile = authUser._id == user._id;
-    const isFollow = true;
+    const isFollow = authUser.following.includes(user._id);
 
     return (
         <div className='w-full'>
@@ -48,7 +50,7 @@ function ProfileAvatar({ user }) {
                     isMyProfile ? (
                         <button className='btn btn--secondary_outline py-2'>Edit Profile</button>
                     ) : (
-                        <button className='btn btn--secondary_outline py-2'>
+                        <button onClick={() => followUser(user._id)} className='btn btn--secondary_outline py-2 cursor-pointer'>
                             {
                                 isFollow ? 'UnFollow' : 'Follow'
                             }

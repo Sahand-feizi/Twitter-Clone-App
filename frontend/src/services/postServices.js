@@ -9,5 +9,9 @@ export const createPostApi = (data) => {
 }
 
 export const removePostApi = (postId) => {
-    return http.delete(`posts/${postId}`).then(({ data }) => data)
+    return http.delete(`/posts/${postId}`).then(({ data }) => data)
+}
+
+export const likePostApi = (postId) => {
+    return http.post(`/posts/like/${postId}`).then(({ data }) => data)
 }

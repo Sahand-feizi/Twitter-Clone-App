@@ -8,7 +8,9 @@ function Modal({ isOpen, setIsOpen, children }) {
 
     if (!isOpen) return null
     return (
-        <div id='modal' ref={itemRef} className='w-[calc(100%-1rem)] p-4 bg-secondary-0 border border-secondary-400 rounded-lg top-[30%] fixed left-4 max-h-[calc(100%-1rem)]'>
+        <div id='modal' ref={itemRef} className='max-w-sm fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+        rounded-lg bg-secondary-100 p-4 shadow-lg transition-all duration-500 ease-out
+        w-[calc(100vw-2rem)] md:max-w-lg max-h-[calc(100vh-2rem)] overflow-y-auto no-scrollbar'>
             {children}
         </div>
     )

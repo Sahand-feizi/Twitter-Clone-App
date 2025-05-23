@@ -9,6 +9,7 @@ import Comments from '../comment/Comments';
 import CommentForm from '../comment/CommentForm';
 import useGetAuthUser from '../auth/useGetAuthUser'
 import useRemovePost from './useRemovePost';
+import useLikePost from './useLikePost';
 
 function Post({ post }) {
     const [isOpen, setIsOpen] = useState(false)
@@ -16,9 +17,14 @@ function Post({ post }) {
     const { authUser } = useGetAuthUser()
     const isMyPost = authUser?._id === user?._id;
     const { removePost, isDeleting } = useRemovePost()
+    const { likePost, isUpdating } = useLikePost(post._id)
 
     const removePostHandler = () => {
         removePost(post?._id)
+    }
+
+    const likePostHandler = () => {
+        likePost(post._id)
     }
 
     return (
@@ -69,7 +75,7 @@ function Post({ post }) {
                         <BiRepost />
                         <p className='text-sm'>0</p>
                     </button>
-                    <button className='text-error text-lg flex gap-x-2 items-center'>
+                    <button onClick={likePostHandler} className='text-error text-lg flex gap-x-2 items-center'>
                         <FaRegHeart />
                         <p className='text-sm'>{likes?.length}</p>
                     </button>

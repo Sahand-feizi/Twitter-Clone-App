@@ -1,10 +1,10 @@
 import React from 'react'
-import { USERS_FOR_RIGHT_PANEL } from '../../db/dummyData'
 import SuggestedUser from './SuggestedUser'
 import SuggestedUserSkeleton from './skeleton/SuggestedUserSkeleton';
+import useGetSuggestedUsers from './useGetSuggestedUsers'
 
 function SuggestedUsers() {
-    const isLoading = false;
+    const { suggestedUsers, isLoading } = useGetSuggestedUsers()
 
     if (isLoading)
         return (
@@ -20,10 +20,10 @@ function SuggestedUsers() {
         )
 
     return (
-        <div className='rounded-xl bg-secondary-0 hidden lg:block sticky top-0 p-2 right-0 max-h-[16.5rem] space-y-4 ml-4'>
+        <div className='rounded-xl bg-secondary-0 hidden lg:block sticky top-0 p-2 right-0 max-h-[17.5rem] space-y-4 ml-4'>
             <h3 className='text-[1rem] font-bold text-secondary-900 text-center'>Who to follow</h3>
             {
-                USERS_FOR_RIGHT_PANEL.map(user => (
+                suggestedUsers.map(user => (
                     <SuggestedUser user={user} />
                 ))
             }

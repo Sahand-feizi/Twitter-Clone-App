@@ -15,7 +15,6 @@ export default function useLikePost(id) {
                     return post
                 })
             })
-            toast.success('Post liked successfuly')
         },
         onError: ({ message }) => {
             toast.error(message)

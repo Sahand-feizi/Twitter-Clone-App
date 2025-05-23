@@ -3,3 +3,7 @@ import http from './httpServices'
 export const getPostsApi = (url) => {
     return http.get(url).then(({ data }) => data)
 }
+
+export const createPostApi = (data) => {
+    return http.post('/posts/create', data).then(({ data }) => data)
+}

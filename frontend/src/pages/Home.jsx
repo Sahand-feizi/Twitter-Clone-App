@@ -30,7 +30,7 @@ function Home() {
                         <PostSkeleton />
                     </div>
                 ) : (
-                    <Posts posts={posts} />
+                    <Posts posts={posts} isLoading={isLoading}/>
                 )
             }
         </div>

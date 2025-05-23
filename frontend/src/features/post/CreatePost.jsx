@@ -3,11 +3,20 @@ import { CiImageOn } from "react-icons/ci";
 import { BsFillEmojiSmileFill } from "react-icons/bs";
 import { GoX } from "react-icons/go";
 import useReadFileInput from '../../hooks/useReadFileInput';
+import useCreatePost from './useCreatePost';
+import Loading from '../../ui/Loading'
 
 function CreatePost() {
     const [text, setText] = useState('')
     const [img, setImg] = useState(null)
     const { inputRef, onImageChange } = useReadFileInput(setImg)
+    const { createPost, isCreating } = useCreatePost()
+
+    const createPostHandler = () => {
+        createPost({ text, img })
+        setImg(null)
+        setText('')
+    }
 
     return (
         <div className='w-full flex gap-x-2 p-4 border-b border-b-secondary-400'>
@@ -46,7 +55,13 @@ function CreatePost() {
                             <BsFillEmojiSmileFill />
                         </button>
                     </div>
-                    <button className='btn btn--primary_fill text-sm py-2'>Post</button>
+                    <button type='submit' onClick={createPostHandler} className='btn btn--primary_fill text-sm py-2'>
+                        {
+                            isCreating ? (
+                                <Loading size='xs' />
+                            ) : 'Post'
+                        }
+                    </button>
                 </div>
             </div>
         </div>

@@ -7,26 +7,34 @@ import { FaRegBookmark } from "react-icons/fa6";
 import Modal from '../../ui/Modal';
 import Comments from '../comment/Comments';
 import CommentForm from '../comment/CommentForm';
+import useGetAuthUser from '../auth/useGetAuthUser'
 
-function Post({ text, img, user, comments, likes }) {
+function Post({ post }) {
     const [isOpen, setIsOpen] = useState(false)
+    const { text, img, user, comments, likes } = post;
+    const { authUser } = useGetAuthUser()
+    const isMyPost = authUser?._id === user?._id;
 
     return (
         <div className='w-full flex gap-x-2 p-4 border-b border-b-secondary-400'>
             <img
-                src={user.profileImg}
-                alt={user.username}
+                src={user?.profileImg || '/avatar-placeholder.png'}
+                alt={user?.username}
                 className='h-[40px] w-[40px] rounded-full object-cover'
             />
             <div className='w-full space-y-2'>
                 <div className='flex items-center justify-between w-full'>
                     <div className='flex items-center gap-x-2'>
-                        <h4 className='text-white text-lg'>{user.fullName}</h4>
-                        <p className='text-secondary-400 text-sm'>@{user.username}</p>
+                        <h4 className='text-white text-lg'>{user?.fullName}</h4>
+                        <p className='text-secondary-400 text-sm'>@{user?.username}</p>
                     </div>
-                    <button className='text-error text-lg'>
-                        <FaTrash />
-                    </button>
+                    {
+                        isMyPost ? (
+                            <button className='text-error text-lg'>
+                                <FaTrash />
+                            </button>
+                        ) : null
+                    }
                 </div>
                 <p className='text-md text-white'>{text}</p>
                 {
@@ -39,7 +47,7 @@ function Post({ text, img, user, comments, likes }) {
                     <>
                         <button onClick={() => setIsOpen(true)} className='text-secondary-500 text-lg hover:text-secondary-600 flex gap-x-2 items-center'>
                             <FaRegComment />
-                            <p className='text-sm'>{comments.length}</p>
+                            <p className='text-sm'>{comments?.length}</p>
 
                         </button>
                         <Modal
@@ -57,7 +65,7 @@ function Post({ text, img, user, comments, likes }) {
                     </button>
                     <button className='text-error text-lg flex gap-x-2 items-center'>
                         <FaRegHeart />
-                        <p className='text-sm'>{likes.length}</p>
+                        <p className='text-sm'>{likes?.length}</p>
                     </button>
                     <button className='text-secondary-500 text-lg hover:text-secondary-600'>
                         <FaRegBookmark />

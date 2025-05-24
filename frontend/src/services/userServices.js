@@ -11,3 +11,7 @@ export const getUserProfileApi = (username) => {
 export const followUserApi = (id) => {
     return http.post(`/users/follow/${id}`).then(({ data }) => data)
 }
+
+export const editProfileApi = (data) => {
+    return http.post(`/users/update`, data).then(({ data }) => data)
+}

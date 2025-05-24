@@ -3,6 +3,9 @@ import useReadFileInput from '../../hooks/useReadFileInput'
 import { MdEdit } from "react-icons/md";
 import useGetAuthUser from '../auth/useGetAuthUser';
 import useFollowUser from '../../hooks/useFollowUser';
+import Loading from '../../ui/Loading'
+import useEditProfile from './useEditProfile'
+import { editProfileApi } from '../../services/userServices';
 
 function ProfileAvatar({ user }) {
     const [coverImg, setCoverImg] = useState(null)
@@ -11,9 +14,16 @@ function ProfileAvatar({ user }) {
     const { inputRef: profileImgRef, onImageChange: changeProfileImg } = useReadFileInput(setProfileImg)
     const { authUser } = useGetAuthUser()
     const { followUser, isFollowing } = useFollowUser()
+    const { updateProfile, isUpdating } = useEditProfile()
 
     const isMyProfile = authUser._id == user._id;
     const isFollow = authUser.following.includes(user._id);
+
+    const editProfileHandler = async() => {
+        await updateProfile({coverImg, profileImg})
+        setCoverImg(null)
+        setProfileImg(null)
+    }
 
     return (
         <div className='w-full'>
@@ -52,14 +62,22 @@ function ProfileAvatar({ user }) {
                     ) : (
                         <button onClick={() => followUser(user._id)} className='btn btn--secondary_outline py-2 cursor-pointer'>
                             {
-                                isFollow ? 'UnFollow' : 'Follow'
+                                isFollowing ? (
+                                    <Loading size='sm' />
+                                ) : isFollow ? 'UnFollow' : 'Follow'
                             }
                         </button>
                     )
                 }
                 {
                     (coverImg || profileImg) &&
-                    <button className='btn btn--primary_fill py-2'>Update</button>
+                    <button onClick={editProfileHandler} className='btn btn--primary_fill py-2 text-sm'>
+                        {
+                            isUpdating ? (
+                                <Loading size='sm' />
+                            ) : 'Update'
+                        }
+                    </button>
                 }
             </div>
         </div>

@@ -7,7 +7,7 @@ function Posts({ posts, isLoading }) {
         <div className='w-full'>
             {
                 posts.map((post) => (
-                    <Post post={post} />
+                    <Post key={post._id} post={post} />
                 ))
             }
         </div>

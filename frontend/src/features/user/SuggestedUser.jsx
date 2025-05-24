@@ -7,8 +7,6 @@ import useGetAuthUser from '../auth/useGetAuthUser';
 function SuggestedUser({ user }) {
     const { followUser, isFollowing } = useFollowUser()
     const { authUser } = useGetAuthUser()
-    console.log(authUser, user);
-    
 
     const isMyFollowing = authUser.following.includes(user._id);
 

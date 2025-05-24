@@ -24,7 +24,7 @@ function SuggestedUsers() {
             <h3 className='text-[1rem] font-bold text-secondary-900 text-center'>Who to follow</h3>
             {
                 suggestedUsers.map(user => (
-                    <SuggestedUser user={user} />
+                    <SuggestedUser key={user._id} user={user} />
                 ))
             }
         </div>

@@ -4,8 +4,8 @@ import useGetNotifications from './useGetNotifications'
 
 function Notifications() {
     const { notifications, isLoading } = useGetNotifications()
-
-    if (!isLoading, !notifications)
+    
+    if (!notifications)
         return (
             <div className='w-full'>
                 <h3 className="text-lg text-secondary-900 font-bold text-left">
@@ -18,7 +18,7 @@ function Notifications() {
         <div className='w-full'>
             {
                 notifications.map(notifiction => (
-                    <Notification {...notifiction} />
+                    <Notification key={notifiction._id} {...notifiction} />
                 ))
             }
         </div>

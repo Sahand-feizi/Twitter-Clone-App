@@ -5,7 +5,8 @@ import useGetAuthUser from '../auth/useGetAuthUser';
 import useFollowUser from '../../hooks/useFollowUser';
 import Loading from '../../ui/Loading'
 import useEditProfile from './useEditProfile'
-import { editProfileApi } from '../../services/userServices';
+import EditProfileForm from './EditProfileForm';
+import Modal from '../../ui/Modal'
 
 function ProfileAvatar({ user }) {
     const [coverImg, setCoverImg] = useState(null)
@@ -15,12 +16,13 @@ function ProfileAvatar({ user }) {
     const { authUser } = useGetAuthUser()
     const { followUser, isFollowing } = useFollowUser()
     const { updateProfile, isUpdating } = useEditProfile()
+    const [ isOpen, setIsOpen ] = useState(false)
 
     const isMyProfile = authUser._id == user._id;
     const isFollow = authUser.following.includes(user._id);
 
-    const editProfileHandler = async() => {
-        await updateProfile({coverImg, profileImg})
+    const editProfileHandler = async () => {
+        await updateProfile({ coverImg, profileImg })
         setCoverImg(null)
         setProfileImg(null)
     }
@@ -58,7 +60,15 @@ function ProfileAvatar({ user }) {
             <div className='flex items-center gap-x-2 justify-end py-3 px-4'>
                 {
                     isMyProfile ? (
-                        <button className='btn btn--secondary_outline py-2'>Edit Profile</button>
+                        <>
+                            <button onClick={() => setIsOpen(true)} className='btn btn--secondary_outline py-2'>Edit Profile</button>
+                            <Modal
+                                isOpen={isOpen}
+                                setIsOpen={setIsOpen}
+                            >
+                                <EditProfileForm />
+                            </Modal>
+                        </>
                     ) : (
                         <button onClick={() => followUser(user._id)} className='btn btn--secondary_outline py-2 cursor-pointer'>
                             {

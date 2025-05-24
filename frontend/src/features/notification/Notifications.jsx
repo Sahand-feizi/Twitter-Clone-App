@@ -5,11 +5,11 @@ import useGetNotifications from './useGetNotifications'
 function Notifications() {
     const { notifications, isLoading } = useGetNotifications()
     
-    if (!notifications)
+    if (notifications == undefined)
         return (
             <div className='w-full'>
-                <h3 className="text-lg text-secondary-900 font-bold text-left">
-                    There are no notifications
+                <h3 className="text-base text-secondary-900 font-bold text-center">
+                    No notifications 🤔
                 </h3>
             </div>
         )

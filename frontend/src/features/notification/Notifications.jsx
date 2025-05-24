@@ -1,14 +1,23 @@
 import React from 'react'
-import { NOtifications } from '../../db/dummyData'
 import Notification from './Notification'
+import useGetNotifications from './useGetNotifications'
 
 function Notifications() {
-    const isLoading = false;
+    const { notifications, isLoading } = useGetNotifications()
+
+    if (!isLoading, !notifications)
+        return (
+            <div className='w-full'>
+                <h3 className="text-lg text-secondary-900 font-bold text-left">
+                    There are no notifications
+                </h3>
+            </div>
+        )
 
     return (
         <div className='w-full'>
             {
-                NOtifications.map(notifiction => (
+                notifications.map(notifiction => (
                     <Notification {...notifiction} />
                 ))
             }

@@ -1,14 +1,34 @@
 import React from 'react'
 import TextField from '../../ui/TextField'
 import { useForm } from 'react-hook-form'
+import useEditProfile from './useEditProfile'
+import useGetAuthUser from '../auth/useGetAuthUser'
 
-function EditProfileForm() {
-    const { register, handleSubmit, formState: { errors }, reset } = useForm()
+function EditProfileForm({ setIsOpen }) {
+    const { authUser, isLoading } = useGetAuthUser()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+        defaultValues: {
+            fullName: authUser?.fullName,
+            username: authUser?.username,
+            email: authUser?.email,
+            bio: authUser?.bio,
+            link: authUser?.link,
+        }
+    })
+    const { updateProfile, isUpdating } = useEditProfile()
+
+    const editProfileHandler = (data) => {
+        updateProfile(data, {
+            onSuccess: () => {
+                setIsOpen(false)
+            }
+        })
+    }
 
     return (
         <div className='w-full'>
             <h2 className='text-lg text-secondary-900 text-center font-bold mb-4'>Update Profile</h2>
-            <form className='grid grid-cols-2 grid-rows-5 gap-2'>
+            <form onSubmit={handleSubmit(editProfileHandler)} className='grid grid-cols-2 grid-rows-5 gap-2'>
                 <TextField
                     name='fullName'
                     register={register}
@@ -40,15 +60,15 @@ function EditProfileForm() {
                     }}
                     placeholder='Email'
                 />
-                
-                    <textarea
-                        {...register('bio', {
-                            required: 'this is required'
-                        })}
-                        placeholder='Bio'
-                        className='w-full h-[2.7rem] p-1 text-sm border border-secondary-300 text-secondary-900 bg-transparent text-lg outline-none rounded-lg'
-                    />
-                
+
+                <textarea
+                    {...register('bio', {
+                        required: 'this is required'
+                    })}
+                    placeholder='Bio'
+                    className='w-full h-[2.7rem] p-1 text-sm border border-secondary-300 text-secondary-900 bg-transparent outline-none rounded-lg'
+                />
+
                 <TextField
                     name='currentPassword'
                     register={register}
@@ -95,7 +115,7 @@ function EditProfileForm() {
                     className='col-start-1 col-end-3'
                     placeholder='Link'
                 />
-                <button className='btn btn--primary_fill col-start-1 col-end-3'>Update</button>
+                <button type='submit' className='btn btn--primary_fill col-start-1 col-end-3'>Update</button>
             </form>
         </div>
     )

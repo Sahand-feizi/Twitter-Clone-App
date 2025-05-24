@@ -16,8 +16,8 @@ export default function useEditProfile() {
             })
             toast.success('Profile Edit successfuly')
         },
-        onError: ({ message }) => {
-            toast.error(message)
+        onError: (err) => {
+            toast.error(err?.response?.data?.error)
         }
     })
 

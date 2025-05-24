@@ -1,6 +1,6 @@
 import React from 'react'
 
-function TextField({ type = 'text', icon, name, placeholder, register, validationSchema, errors, className=''}) {
+function TextField({ type = 'text', icon, name, placeholder, register, validationSchema, errors, className = ''}) {
     return (
         <div className={`space-y-2 w-full ${className}`}>
             <div className={`textFieldContainer w-full ${className}`}>

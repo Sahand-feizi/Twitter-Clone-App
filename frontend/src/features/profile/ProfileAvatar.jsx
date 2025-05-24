@@ -66,7 +66,7 @@ function ProfileAvatar({ user }) {
                                 isOpen={isOpen}
                                 setIsOpen={setIsOpen}
                             >
-                                <EditProfileForm />
+                                <EditProfileForm setIsOpen={setIsOpen}/>
                             </Modal>
                         </>
                     ) : (

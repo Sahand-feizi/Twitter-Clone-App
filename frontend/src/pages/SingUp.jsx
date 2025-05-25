@@ -72,7 +72,7 @@ function SingUp() {
                         required: 'this is required',
                         minLength:{
                             value: 6,
-                            message: 'this field most be higher than 8'
+                            message: 'this field most be higher than 6'
                         },
                         maxLength:{
                             value: 15,

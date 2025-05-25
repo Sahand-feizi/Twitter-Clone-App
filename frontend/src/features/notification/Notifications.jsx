@@ -4,22 +4,17 @@ import useGetNotifications from './useGetNotifications'
 
 function Notifications() {
     const { notifications, isLoading } = useGetNotifications()
-    
-    if (notifications == undefined)
-        return (
-            <div className='w-full'>
-                <h3 className="text-base text-secondary-900 font-bold text-center">
-                    No notifications 🤔
-                </h3>
-            </div>
-        )
 
     return (
         <div className='w-full'>
             {
-                notifications.map(notifiction => (
-                    <Notification key={notifiction._id} {...notifiction} />
-                ))
+                notifications?.length > 0 ? (
+                    notifications.map(notifiction => (
+                        <Notification key={notifiction._id} {...notifiction} />
+                    ))
+                ) : (
+                    <h1 className='text-secondary-900 text-lg font-bold my-4 text-center'>No Notifications 🤔</h1>
+                )
             }
         </div>
     )

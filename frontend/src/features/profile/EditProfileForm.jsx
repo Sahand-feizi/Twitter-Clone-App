@@ -62,9 +62,7 @@ function EditProfileForm({ setIsOpen }) {
                 />
 
                 <textarea
-                    {...register('bio', {
-                        required: 'this is required'
-                    })}
+                    {...register('bio')}
                     placeholder='Bio'
                     className='w-full h-[2.7rem] p-1 text-sm border border-secondary-300 text-secondary-900 bg-transparent outline-none rounded-lg'
                 />
@@ -74,7 +72,6 @@ function EditProfileForm({ setIsOpen }) {
                     register={register}
                     errors={errors}
                     validationSchema={{
-                        required: 'this is required',
                         minLength: {
                             value: 6,
                             message: 'this field most be higher than 8'
@@ -92,7 +89,6 @@ function EditProfileForm({ setIsOpen }) {
                     register={register}
                     errors={errors}
                     validationSchema={{
-                        required: 'this is required',
                         minLength: {
                             value: 6,
                             message: 'this field most be higher than 8'
@@ -109,9 +105,6 @@ function EditProfileForm({ setIsOpen }) {
                     name='link'
                     register={register}
                     errors={errors}
-                    validationSchema={{
-                        required: 'this is required'
-                    }}
                     className='col-start-1 col-end-3'
                     placeholder='Link'
                 />

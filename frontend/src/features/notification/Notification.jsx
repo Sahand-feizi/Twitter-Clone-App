@@ -11,11 +11,11 @@ function Notification({ from, type }) {
             <div className='flex flex-col items-center justify-center'>
                 <img
                     className='h-12 w-12 rounded-full object-cover'
-                    src={from.profileImg}
+                    src={from?.profileImg}
                     alt="profileImage"
                 />
                 <div className="flex gap-x-2 text-secondary-900 items-center">
-                    <Link to={`/profile/${from.username}`} className='text-lg font-bold'>@{from.username}</Link>
+                    <Link to={`/profile/${from?.username}`} className='text-lg font-bold'>@{from?.username}</Link>
                     <p className='text-sm font-thin'>
                         {
                             type == 'like' ? 'like your post' : 'followed you'

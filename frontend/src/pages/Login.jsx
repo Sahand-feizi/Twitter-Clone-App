@@ -4,8 +4,6 @@ import { useForm } from 'react-hook-form'
 import TextField from '../ui/TextField'
 import { FaUser } from "react-icons/fa";
 import { PiPasswordFill } from "react-icons/pi";
-import { MdAlternateEmail } from "react-icons/md";
-import { SiNamecheap } from "react-icons/si";
 import { useNavigate } from 'react-router-dom';
 import useLoginUser from '../features/auth/useLoginUser'
 import Loading from '../ui/Loading';

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import HeaderProfile from '../features/profile/headerProfile'
-import { POSTS } from '../db/dummyData'
+import HeaderProfile from '../features/profile/HeaderProfile'
 import ProfileAvatar from '../features/profile/ProfileAvatar'
 import ProfileInformation from '../features/profile/ProfileInformation'
 import Posts from '../features/post/Posts'

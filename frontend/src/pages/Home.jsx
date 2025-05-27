@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Sidbar from '../ui/Sidbar'
 import CreatePost from '../features/post/CreatePost'
 import Posts from '../features/post/Posts'
 import PostSkeleton from '../features/post/skeleton/PostSkeleton'

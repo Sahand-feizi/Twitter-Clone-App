@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = 'https://twitter-clone-app-0mhw.onrender.com/'
+const BASE_URL = 'https://twitter-clone-app-2ps2.onrender.com'
 
 const app = axios.create({
     baseURL: BASE_URL,

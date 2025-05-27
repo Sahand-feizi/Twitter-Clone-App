@@ -10,6 +10,7 @@ import CommentForm from '../comment/CommentForm';
 import useGetAuthUser from '../auth/useGetAuthUser'
 import useRemovePost from './useRemovePost';
 import useLikePost from './useLikePost';
+import { Link } from 'react-router-dom'
 
 function Post({ post }) {
     const [isOpen, setIsOpen] = useState(false)
@@ -36,10 +37,10 @@ function Post({ post }) {
             />
             <div className='w-full space-y-2'>
                 <div className='flex items-center justify-between w-full'>
-                    <div className='flex items-center gap-x-2'>
+                    <Link to={`/profile/${user?.username}`} className='flex items-center gap-x-2'>
                         <h4 className='text-white text-lg'>{user?.fullName}</h4>
                         <p className='text-secondary-400 text-sm'>@{user?.username}</p>
-                    </div>
+                    </Link>
                     {
                         isMyPost ? (
                             <button onClick={removePostHandler} className='text-error text-lg'>
@@ -68,7 +69,7 @@ function Post({ post }) {
                         >
                             <p className="text-xl text-white font-bold text-center">Comments</p>
                             {comments.length > 0 && <Comments comments={comments} />}
-                            <CommentForm postId={post._id}/>
+                            <CommentForm postId={post._id} />
                         </Modal>
                     </>
                     <button className='text-secondary-500 text-2xl hover:text-secondary-600 flex gap-x-2 items-center'>

@@ -5,12 +5,14 @@ import { GoX } from "react-icons/go";
 import useReadFileInput from '../../hooks/useReadFileInput';
 import useCreatePost from './useCreatePost';
 import Loading from '../../ui/Loading'
+import useGetAuthUser from '../auth/useGetAuthUser';
 
 function CreatePost() {
     const [text, setText] = useState('')
     const [img, setImg] = useState(null)
     const { inputRef, onImageChange } = useReadFileInput(setImg)
     const { createPost, isCreating } = useCreatePost()
+    const { authUser } = useGetAuthUser()
 
     const createPostHandler = () => {
         createPost({ text, img })
@@ -21,7 +23,7 @@ function CreatePost() {
     return (
         <div className='w-full flex gap-x-2 p-4 border-b border-b-secondary-400'>
             <img
-                src="/avatars/boy1.png"
+                src={authUser?.profileImg || '/avatar-placeholder.png'}
                 alt="profileImg"
                 className='h-[40px] w-[40px] rounded-full object-cover'
             />

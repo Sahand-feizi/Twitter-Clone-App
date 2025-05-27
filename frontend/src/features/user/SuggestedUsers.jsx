@@ -23,7 +23,7 @@ function SuggestedUsers() {
         <div className='rounded-xl bg-secondary-0 hidden lg:block sticky top-0 p-2 right-0 max-h-[17.5rem] space-y-4 ml-4'>
             <h3 className='text-[1rem] font-bold text-secondary-900 text-center'>Who to follow</h3>
             {
-                suggestedUsers?.length > 0 ? (
+                (suggestedUsers?.length > 0 && !isLoading) ? (
                     suggestedUsers.map(user => (
                         <SuggestedUser key={user._id} user={user} />
                     ))

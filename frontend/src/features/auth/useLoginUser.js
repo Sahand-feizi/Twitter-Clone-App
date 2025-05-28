@@ -14,7 +14,7 @@ export default function useLoginUser() {
             queryClient.invalidateQueries({
                 queryKey: ['authUser']
             })
-            toast.success('Wellcome to Frelancer App')
+            toast.success('Wellcome to Twitter app')
         },
         onError: (err) => {
             toast.error(err?.response?.data?.error)

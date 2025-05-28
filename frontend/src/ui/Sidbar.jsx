@@ -16,29 +16,35 @@ function Sidbar() {
     const { logoutUser, isLoading: isPending } = useLogoutUser()
 
     return (
-        <nav className='pr-4 border-r border-r-secondary-400 h-screen flex flex-col list-none pb-10 justify-between sticky top-5'>
+        <nav className='pr-2 border-r border-r-secondary-400 h-screen flex flex-col list-none pb-10 justify-between sticky top-5'>
             <ul>
                 <NavLink to='/'>
                     <li>
                         <XSvg className='fill-white w-10 mx-auto md:mx-3 block' />
                     </li>
                 </NavLink>
-                <NavLink className='SidbarNav' to='/'>
+                <NavLink className={({ isActive }) => {
+                    return isActive ? 'SidbarNav bg-secondary-100' : 'SidbarNav'
+                }} to='/'>
                     <li className='sm:flex sm:items-center sm:gap-x-3'>
                         <TiHome />
-                        <p className='text-lg text-secondary-900 hidden md:flex'>Home</p>
+                        <p className='text-lg hidden md:flex'>Home</p>
                     </li>
                 </NavLink>
-                <NavLink className='SidbarNav' to='/notification'>
+                <NavLink className={({ isActive }) => {
+                    return isActive ? 'SidbarNav bg-secondary-100' : 'SidbarNav'
+                }} to='/notification'>
                     <li className='sm:flex sm:items-center sm:gap-x-3'>
                         <IoIosNotifications />
-                        <p className='text-lg text-secondary-900 hidden md:flex'>Notifications</p>
+                        <p className='text-lg hidden md:flex'>Notifications</p>
                     </li>
                 </NavLink>
-                <NavLink className='SidbarNav' to={`/profile/${authUser?.username}`}>
+                <NavLink className={({ isActive }) => {
+                    return isActive ? 'SidbarNav bg-secondary-100' : 'SidbarNav'
+                }} to={`/profile/${authUser?.username}`}>
                     <li className='md:flex md:items-center md:gap-x-3 md:justify-start'>
                         <FaUser />
-                        <p className='text-lg text-secondary-900 hidden md:flex'>Profile</p>
+                        <p className='text-lg hidden md:flex'>Profile</p>
                     </li>
                 </NavLink>
             </ul>

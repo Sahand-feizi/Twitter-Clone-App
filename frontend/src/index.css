@@ -59,7 +59,7 @@
     }
 
     .SidbarNav {
-        @apply relative w-full h-[4rem] md:h-[3.5rem] md:px-3 rounded-full flex items-center justify-center md:justify-start text-2xl my-1 hover:bg-secondary-100 duration-100
+        @apply relative w-full h-[3rem] my-4 md:h-[3.5rem] md:px-3 rounded-full flex items-center justify-center md:justify-start text-2xl md:my-1 hover:bg-secondary-100 duration-100 text-secondary-900
     }
 }
 

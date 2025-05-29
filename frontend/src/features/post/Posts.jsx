@@ -2,7 +2,6 @@ import React from 'react'
 import Post from './Post'
 
 function Posts({ posts, isLoading }) {
-    console.log(posts);
 
     return (
         <div className='w-full'>

@@ -18,7 +18,7 @@ function Profile() {
 
     useEffect(() => {
         postsRefetch()
-    }, [feedType])
+    }, [feedType, user])
 
     return (
         <div className='border-r border-r-secondary-400'>

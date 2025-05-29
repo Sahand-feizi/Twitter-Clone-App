@@ -18,8 +18,8 @@ function Home() {
     return (
         <div className='border-r border-r-secondary-400 w-full'>
             <div className='flex items-center border-b border-b-secondary-400'>
-                <button onClick={() => setFeedType('forYou')} className={`flex-1 flex justify-center relative items-center text-center bg-transparent py-2 hover:bg-secondary-100 ${feedType == "forYou" && hoverFeedTypeStyle}`}>forYou</button>
-                <button onClick={() => setFeedType('following')} className={`flex-1 flex justify-center relative items-center text-center bg-transparent py-2 hover:bg-secondary-100 ${feedType == "following" && hoverFeedTypeStyle}`}>following</button>
+                <button onClick={() => setFeedType('forYou')} className={`flex-1 flex justify-center relative items-center text-center bg-transparent py-2 hover:bg-secondary-100 text-secondary-900 ${feedType == "forYou" && hoverFeedTypeStyle}`}>forYou</button>
+                <button onClick={() => setFeedType('following')} className={`flex-1 flex justify-center relative items-center text-center bg-transparent py-2 hover:bg-secondary-100 text-secondary-900 ${feedType == "following" && hoverFeedTypeStyle}`}>following</button>
             </div>
             <CreatePost />
             {

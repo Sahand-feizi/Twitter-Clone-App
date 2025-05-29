@@ -44,8 +44,8 @@ function Profile() {
                 )
             }
             <div className='flex items-center border-b border-b-secondary-400 mt-5'>
-                <button onClick={() => setFeedType('posts')} className={`flex-1 flex justify-center relative items-center text-center bg-transparent py-2 hover:bg-secondary-100 ${feedType == "posts" && hoverFeedTypeStyle}`}>Posts</button>
-                <button onClick={() => setFeedType('likes')} className={`flex-1 flex justify-center relative items-center text-center bg-transparent py-2 hover:bg-secondary-100 ${feedType == "likes" && hoverFeedTypeStyle}`}>Likes</button>
+                <button onClick={() => setFeedType('posts')} className={`flex-1 flex justify-center relative items-center text-center bg-transparent py-2 hover:bg-secondary-100 text-secondary ${feedType == "posts" && hoverFeedTypeStyle}`}>Posts</button>
+                <button onClick={() => setFeedType('likes')} className={`flex-1 flex justify-center relative items-center text-center bg-transparent py-2 hover:bg-secondary-100 text-secondary ${feedType == "likes" && hoverFeedTypeStyle}`}>Likes</button>
             </div>
             {
                 isLoading || isLoadingPost || isRefetching ? (
